@@ -20,4 +20,15 @@ class ServerRepository extends Repository {
         return $this->server->orderBy('created_at', 'desc')->paginate($per_page);
     }
 
+    public function findById($id) {
+        return $this->server->find($id);
+    }
+
+    public function updateById($id, $data) {
+        $server = $this->server->find($id);
+        $server->update($data);
+
+        return $server;
+    }
+
 }

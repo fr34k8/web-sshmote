@@ -1,0 +1,57 @@
+{% extends 'layout/frontend.html' %}
+
+{% block container %}
+    <div id="server-create">
+        <h3>Create Server</h3>
+        <hr>
+        {% include 'shared/flash_message.html' %}
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-horizontal" method="post" action="{{ path_for('web.server.update') }}">
+                    <input type="hidden" name="id" value="{{ server.id }}">
+
+                    {{ csrf_tags() }}
+
+                    <div class="form-group">
+                        <label for="host" class="col-sm-2 control-label">Host</label>
+                        <div class="col-sm-10">
+                            <input type="host" class="form-control" id="host" name="host" placeholder="Host" value="{{ server.host }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="port" class="col-sm-2 control-label">Port</label>
+                        <div class="col-sm-10">
+                            <input type="port" class="form-control" id="port" name="port" placeholder="Port" value="{{ server.port }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="username" class="form-control" id="username" name="username" placeholder="Username" value="{{ server.username }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ server.password }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="auth_method" class="col-sm-2 control-label">Auth Method</label>
+                        <div class="col-sm-10">
+                            <select name="auth_method" id="auth_method" class="form-control">
+                                <option value="password"{% if server.auth_method == "password" %} selected="selected"{% endif %}>Password</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

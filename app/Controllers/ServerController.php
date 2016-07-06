@@ -63,7 +63,44 @@ class ServerController extends Controller {
     }
 
     public function edit(Request $request, Response $response, array $arguments) {
+        $server = $this->serverRepository->findById($arguments['id']);
 
+        return $this->view('server/edit.html', compact('server'));
+    }
+
+    public function update(Request $request, Response $response, array $arguments) {
+        $id = $request->getParam('id');
+
+        $validator = $this->validator;
+        $validator->validators($request->getParams(), [
+            'host'        => v::notEmpty()->noWhitespace(),
+            'port'        => v::notEmpty()->between(0, 63737),
+            'username'    => v::notEmpty(),
+            'password'    => v::notEmpty(),
+            'auth_method' => v::notEmpty()->in(['password']),
+        ]);
+
+        if ($validator->fails() === true) {
+            $this->flash->error($validator->firstError());
+        }else{
+            $host        = $request->getParam('host');
+            $port        = $request->getParam('port');
+            $username    = $request->getParam('username');
+            $password    = $request->getParam('password');
+            $auth_method = $request->getParam('auth_method');
+
+            $this->serverRepository->updateById($id, [
+                'host'        => $host,
+                'port'        => $port,
+                'username'    => $username,
+                'password'    => $password,
+                'auth_method' => $auth_method,
+            ]);
+
+            $this->flash->success("Server updated");
+        }
+
+        return $this->redirect($this->router->pathFor('web.server.edit', ['id' => $id]));
     }
 
 }
