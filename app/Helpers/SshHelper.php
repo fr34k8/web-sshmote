@@ -38,6 +38,9 @@ class SshHelper {
                 case "ping":
                     $command = "ping -c 4 -t 15 hk.yahoo.com";
                     break;
+                case "host":
+                    $command = "host hk.yahoo.com";
+                    break;
             }
 
             $stream = ssh2_exec($connection, $command);

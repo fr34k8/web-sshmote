@@ -4,6 +4,13 @@
     <div id="dashboard-run">
         <h3>Server response reuslt</h3>
         <hr>
+        <div class="panel panel-default">
+            <div class="panel-heading">Command</div>
+            <div class="panel-body">
+                {{ command }}
+            </div>
+        </div>
+        <hr>
         {% for result in results %}
             <div class="panel panel-default">
                 <div class="panel-heading">{{ result.server.name }}</div>

@@ -28,7 +28,7 @@ class DashboardController extends Controller {
     public function run(Request $request, Response $response, array $arguments) {
         $validator = $this->validator;
         $validator->validators($request->getParams(), [
-            'command' => v::notEmpty()->in(['ping']),
+            'command' => v::notEmpty()->in(['ping', 'host']),
             'servers' => v::notEmpty(),
         ]);
 
@@ -51,6 +51,7 @@ class DashboardController extends Controller {
                 ];
             }
 
+            $this->session->set('serverRunCommand', $command);
             $this->session->set('serverRunResults', $results);
 
             return $this->redirect($this->router->pathFor('web.dashboard.result'));
@@ -58,9 +59,10 @@ class DashboardController extends Controller {
     }
 
     public function result(Request $request, Response $response, array $arguments) {
+        $command = $this->session->get('serverRunCommand');
         $results = $this->session->get('serverRunResults');
 
-        return $this->view('dashboard/result.html', compact('results'));
+        return $this->view('dashboard/result.html', compact('command', 'results'));
     }
 
 }
