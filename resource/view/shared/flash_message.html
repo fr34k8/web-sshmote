@@ -1,0 +1,11 @@
+{% if _SESSION['error'] %}
+    <div class="alert alert-error alert-danger">
+        <strong>Error!</strong>&nbsp;{{ _SESSION['error'] }}
+    </div>
+{% endif %}
+
+{% if _SESSION['error'] %}
+    <div class="alert alert-success">
+        <strong>Success!</strong>&nbsp;{{ _SESSION['success'] }}
+    </div>
+{% endif %}

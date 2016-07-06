@@ -17,7 +17,18 @@ class HomeController extends Controller {
         $username = $request->getParam('username');
         $password = $request->getParam('password');
 
-        dump($username, $password);
+        $login = $this->auth->attempt([
+            'username' => $username,
+            'password' => $password
+        ]);
+
+        if ($login === false) {
+            $response = $response->withStatus(302)->withHeader('Location', $this->router->pathFor('web.home.index'));
+        }else{
+            $response = $response->withStatus(302)->withHeader('Location', $this->router->pathFor('web.dashboard.index'));
+        }
+
+        return $response;
     }
 
 }
