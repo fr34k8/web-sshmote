@@ -3,8 +3,15 @@ namespace App\Helpers;
 
 class SshHelper {
 
+    private $targetIp;
     private $server;
     private $command;
+
+    public function targetIp($ip) {
+        $this->targetIp = $ip;
+
+        return $this;
+    }
 
     public function server($server) {
         $this->server = $server;
@@ -36,10 +43,10 @@ class SshHelper {
 
             switch($this->command) {
                 case "ping":
-                    $command = "ping -c 4 -t 15 hk.yahoo.com";
+                    $command = "ping -c 4 -t 15 ".$this->targetIp;
                     break;
                 case "host":
-                    $command = "host hk.yahoo.com";
+                    $command = "host ".$this->targetIp;
                     break;
             }
 

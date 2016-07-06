@@ -28,8 +28,9 @@ class DashboardController extends Controller {
     public function run(Request $request, Response $response, array $arguments) {
         $validator = $this->validator;
         $validator->validators($request->getParams(), [
-            'command' => v::notEmpty()->in(['ping', 'host']),
-            'servers' => v::notEmpty(),
+            'command'   => v::notEmpty()->in(['ping', 'host']),
+            'target_ip' => v::notEmpty(),
+            'servers'   => v::notEmpty(),
         ]);
 
         if ($validator->fails()) {
@@ -37,17 +38,18 @@ class DashboardController extends Controller {
 
             return $this->redirect($this->router->pathFor('web.dashboard.index'));
         }else{
-            $command = $request->getParam('command');
-            $servers = $request->getParam('servers');
+            $command   = $request->getParam('command');
+            $target_ip = $request->getParam('target_ip');
+            $servers   = $request->getParam('servers');
 
-            $servers    = $this->serverRepository->findByIds($servers);
             $ssh_helper = new SshHelper();
+            $servers    = $this->serverRepository->findByIds($servers);
             $results    = [];
 
             foreach($servers as $server) {
                 $results[$server->id] = [
                     'server'   => $server,
-                    'response' => $ssh_helper->server($server)->command($command)->run(),
+                    'response' => $ssh_helper->targetIp($target_ip)->server($server)->command($command)->run(),
                 ];
             }
 
