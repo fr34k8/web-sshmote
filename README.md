@@ -1,7 +1,7 @@
-# Slim - Simple Work
+# Web Sshmote
 
-A small skeleton application integrated slim and some packages
+A user interface for add remote ssh and run some scripts
 
 ## Installation
 
-This branch is for slim 3. For slim 2, please use the `1.x` branch!
+WIP
