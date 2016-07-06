@@ -37,4 +37,10 @@ class HomeController extends Controller {
         return $response;
     }
 
+    public function signout() {
+        $this->auth->logout();
+
+        return $this->redirect($this->router->pathFor('web.home.index'));
+    }
+
 }
