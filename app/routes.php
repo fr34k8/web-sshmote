@@ -13,4 +13,5 @@ $app->group('/dashboard', function() {
 
 $app->group('/server', function() {
     $this->get('/create', 'App\\Controllers\\ServerController:create')->setName('web.server.create');
+    $this->post('/store', 'App\\Controllers\\ServerController:store')->setName('web.server.store');
 })->add($auth_middleware);
