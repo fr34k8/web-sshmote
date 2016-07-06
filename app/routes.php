@@ -12,6 +12,8 @@ $app->group('/dashboard', function() {
 })->add($auth_middleware);
 
 $app->group('/server', function() {
+    $this->get('/index', 'App\\Controllers\\ServerController:index')->setName('web.server.index');
     $this->get('/create', 'App\\Controllers\\ServerController:create')->setName('web.server.create');
     $this->post('/store', 'App\\Controllers\\ServerController:store')->setName('web.server.store');
+    $this->get('/edit/{id}', 'App\\Controllers\\ServerController:edit')->setName('web.server.edit');
 })->add($auth_middleware);

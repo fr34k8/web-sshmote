@@ -16,4 +16,8 @@ class ServerRepository extends Repository {
         return $this->server->create($data);
     }
 
+    public function findAllWithPaginate($per_page = 12) {
+        return $this->server->orderBy('created_at', 'desc')->paginate($per_page);
+    }
+
 }

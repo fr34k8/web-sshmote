@@ -1,0 +1,44 @@
+{% extends 'layout/frontend.html' %}
+
+{% block container %}
+    <div id="server-index">
+        <h3>List of Server</h3>
+        <hr>
+        {% include 'shared/flash_message.html' %}
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Host</th>
+                                <th>Port</th>
+                                <th>User</th>
+                                <th>Auth Method</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for server in servers %}
+                                <tr>
+                                    <td>{{ server.id }}</td>
+                                    <td>{{ server.host }}</td>
+                                    <td>{{ server.port }}</td>
+                                    <td>{{ server.username }}</td>
+                                    <td>{{ server.auth_method }}</td>
+                                    <td>
+                                        <a href="{{ path_for('web.server.edit', { 'id': server.id }) }}" class="btn btn-default btn-xs">Edit</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {{ servers.render() | raw }}
+    </div>
+{% endblock %}

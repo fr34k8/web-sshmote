@@ -18,6 +18,13 @@ class ServerController extends Controller {
         $this->serverRepository = new ServerRepository();
     }
 
+    public function index(Request $request, Response $response, array $arguments) {
+        $servers = $this->serverRepository->findAllWithPaginate();
+        $servers->setPath($this->router->pathFor('web.server.index'));
+
+        return $this->view('server/index.html', compact('servers'));
+    }
+
     public function create(Request $request, Response $response, array $arguments) {
         return $this->view('server/create.html');
     }
@@ -53,6 +60,10 @@ class ServerController extends Controller {
         }
 
         return $this->redirect($this->router->pathFor('web.server.create'));
+    }
+
+    public function edit(Request $request, Response $response, array $arguments) {
+
     }
 
 }

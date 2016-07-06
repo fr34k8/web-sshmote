@@ -29,6 +29,11 @@
                         </li>
                         {% if (auth_user()) %}
                             <li>
+                                <a class="nav-link" href="{{ path_for('web.server.index') }}">
+                                    <i class="fa fa-server fa-lg" aria-hidden="true"></i> Server
+                                </a>
+                            </li>
+                            <li>
                                 <a class="nav-link" href="{{ path_for('web.server.create') }}">
                                     <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i> Create
                                 </a>
