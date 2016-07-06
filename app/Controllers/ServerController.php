@@ -19,9 +19,7 @@ class ServerController extends Controller {
     }
 
     public function create(Request $request, Response $response, array $arguments) {
-        $csrf_tags = $this->csrf->getTokenForHiddenInputTags();
-
-        return $this->view('server/create.html', compact('csrf_tags'));
+        return $this->view('server/create.html');
     }
 
     public function store(Request $request, Response $response, array $arguments) {

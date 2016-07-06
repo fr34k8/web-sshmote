@@ -11,9 +11,7 @@ class HomeController extends Controller {
         if ($this->auth->user()) {
             return $this->redirect($this->router->pathFor('web.dashboard.index'));
         }else{
-            $csrf_tags = $this->csrf->getTokenForHiddenInputTags();
-
-            return $this->view('home/index.html', compact('csrf_tags'));
+            return $this->view('home/index.html');
         }
     }
 

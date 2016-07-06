@@ -9,7 +9,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <form class="form-horizontal" method="post" action="{{ path_for('web.server.store') }}">
-                    {{ csrf_tags | raw }}
+                    {{ csrf_tags() }}
 
                     <div class="form-group">
                         <label for="host" class="col-sm-2 control-label">Host</label>
