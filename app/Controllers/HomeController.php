@@ -23,9 +23,11 @@ class HomeController extends Controller {
         ]);
 
         if ($login === false) {
-            $response = $response->withStatus(302)->withHeader('Location', $this->router->pathFor('web.home.index'));
+            $this->flash->error('Invalid username or password');
+
+            $response = $this->redirect($this->router->pathFor('web.home.index'));
         }else{
-            $response = $response->withStatus(302)->withHeader('Location', $this->router->pathFor('web.dashboard.index'));
+            $response = $this->redirect($this->router->pathFor('web.dashboard.index'));
         }
 
         return $response;
