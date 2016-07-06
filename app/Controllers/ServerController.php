@@ -32,6 +32,7 @@ class ServerController extends Controller {
     public function store(Request $request, Response $response, array $arguments) {
         $validator = $this->validator;
         $validator->validators($request->getParams(), [
+            'name'        => v::notEmpty(),
             'host'        => v::notEmpty()->noWhitespace(),
             'port'        => v::notEmpty()->between(0, 63737),
             'username'    => v::notEmpty(),
@@ -42,6 +43,7 @@ class ServerController extends Controller {
         if ($validator->fails() === true) {
             $this->flash->error($validator->firstError());
         }else{
+            $name        = $request->getParam('name');
             $host        = $request->getParam('host');
             $port        = $request->getParam('port');
             $username    = $request->getParam('username');
@@ -49,6 +51,7 @@ class ServerController extends Controller {
             $auth_method = $request->getParam('auth_method');
 
             $this->serverRepository->create([
+                'name'        => $name,
                 'host'        => $host,
                 'port'        => $port,
                 'username'    => $username,
@@ -73,6 +76,7 @@ class ServerController extends Controller {
 
         $validator = $this->validator;
         $validator->validators($request->getParams(), [
+            'name'        => v::notEmpty(),
             'host'        => v::notEmpty()->noWhitespace(),
             'port'        => v::notEmpty()->between(0, 63737),
             'username'    => v::notEmpty(),
@@ -83,6 +87,7 @@ class ServerController extends Controller {
         if ($validator->fails() === true) {
             $this->flash->error($validator->firstError());
         }else{
+            $name        = $request->getParam('name');
             $host        = $request->getParam('host');
             $port        = $request->getParam('port');
             $username    = $request->getParam('username');
@@ -90,6 +95,7 @@ class ServerController extends Controller {
             $auth_method = $request->getParam('auth_method');
 
             $this->serverRepository->updateById($id, [
+                'name'        => $name,
                 'host'        => $host,
                 'port'        => $port,
                 'username'    => $username,

@@ -6,6 +6,7 @@ class CreateServerTable extends Migration {
     public function up() {
         $this->schema->create('server', function(Illuminate\Database\Schema\Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 120);
             $table->string('host', 50);
             $table->string('port', 10);
             $table->string('username', 30);

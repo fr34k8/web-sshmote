@@ -7,7 +7,7 @@ class Server extends Model {
 
     protected $table    = 'server';
 
-    protected $fillable = ['host', 'port', 'username', 'password', 'auth_method'];
+    protected $fillable = ['name', 'host', 'port', 'username', 'password', 'auth_method'];
 
     protected $hidden   = ['password'];
 
