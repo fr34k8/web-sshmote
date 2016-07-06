@@ -51,6 +51,12 @@ class SshHelper {
                 case "traceroute":
                     $command = "traceroute -n -m 30 ".$this->targetIp;
                     break;
+                case "mtr":
+                    $command = "mtr -rw ".$this->targetIp;
+                    break;
+                case "nslookup":
+                    $command = "nslookup ".$this->targetIp;
+                    break;
                 default:
                     return "Cannot find related command: ".$this->command;
             }
