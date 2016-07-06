@@ -28,7 +28,7 @@ class DashboardController extends Controller {
     public function run(Request $request, Response $response, array $arguments) {
         $validator = $this->validator;
         $validator->validators($request->getParams(), [
-            'command'   => v::notEmpty()->in(['ping', 'host']),
+            'command'   => v::notEmpty()->in(['ping', 'host', 'traceroute']),
             'target_ip' => v::notEmpty(),
             'servers'   => v::notEmpty(),
         ]);

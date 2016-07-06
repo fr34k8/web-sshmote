@@ -48,6 +48,11 @@ class SshHelper {
                 case "host":
                     $command = "host ".$this->targetIp;
                     break;
+                case "traceroute":
+                    $command = "traceroute -n -m 30 ".$this->targetIp;
+                    break;
+                default:
+                    return "Cannot find related command: ".$this->command;
             }
 
             $stream = ssh2_exec($connection, $command);
