@@ -9,7 +9,9 @@ $app->get('/signout', 'App\\Controllers\\HomeController:signout')->setName('web.
 
 $app->group('/dashboard', function() {
     $this->get('/', 'App\\Controllers\\DashboardController:index')->setName('web.dashboard.index');
-})->add($auth_middleware);
+    $this->post('/run', 'App\\Controllers\\DashboardController:run')->setName('web.dashboard.run');
+    $this->get('/result', 'App\\Controllers\\DashboardController:result')->setName('web.dashboard.result');
+});
 
 $app->group('/server', function() {
     $this->get('/index', 'App\\Controllers\\ServerController:index')->setName('web.server.index');

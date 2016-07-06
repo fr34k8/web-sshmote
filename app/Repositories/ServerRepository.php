@@ -16,12 +16,20 @@ class ServerRepository extends Repository {
         return $this->server->create($data);
     }
 
+    public function findAll() {
+        return $this->server->orderBy('created_at', 'desc')->get();
+    }
+
     public function findAllWithPaginate($per_page = 12) {
         return $this->server->orderBy('created_at', 'desc')->paginate($per_page);
     }
 
     public function findById($id) {
         return $this->server->find($id);
+    }
+
+    public function findByIds($ids) {
+        return $this->server->find($ids);
     }
 
     public function updateById($id, $data) {

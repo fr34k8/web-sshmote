@@ -1,0 +1,16 @@
+{% extends 'layout/frontend.html' %}
+
+{% block container %}
+    <div id="dashboard-run">
+        <h3>Server response reuslt</h3>
+        <hr>
+        {% for result in results %}
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ result.server.name }}</div>
+                <div class="panel-body">
+                    {{ result.response | nl2br }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
