@@ -8,9 +8,13 @@ use App\Contracts\Controller;
 class HomeController extends Controller {
 
     public function index(Request $request, Response $response, array $arguments) {
-        $csrf_tags = $this->csrf->getTokenForHiddenInputTags();
+        if ($this->auth->user()) {
+            return $this->redirect($this->router->pathFor('web.dashboard.index'));
+        }else{
+            $csrf_tags = $this->csrf->getTokenForHiddenInputTags();
 
-        return $this->view('home/index.html', compact('csrf_tags'));
+            return $this->view('home/index.html', compact('csrf_tags'));
+        }
     }
 
     public function signin(Request $request, Response $response, array $arguments) {
