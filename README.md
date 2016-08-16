@@ -4,4 +4,14 @@ A user interface for add remote ssh and run some scripts
 
 ## Installation
 
-WIP
+Composer
+
+    make composer
+
+Vendor
+
+    php composer.phar install
+
+Run
+
+    make server
